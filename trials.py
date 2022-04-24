@@ -8,9 +8,9 @@ def output_all_items(items):
 
 def get_all_evens(nums):
     evens = []
-    for n in nums:
-        if n % 2 == 0:
-            evens.append(n)
+    for num in nums:
+        if num % 2 == 0:
+            evens.append(num)
 
     return evens
 
@@ -18,7 +18,7 @@ def get_all_evens(nums):
 def get_odd_indices(items):
     result = []
 
-    for i in range(0, len(items)):
+    for i in range(len(items)):
         #if index is odd
         if i % 2 == 1:
             result.append(items[i])
@@ -90,13 +90,40 @@ def truncate(string):
     
     return "".join(result)
 
-print(truncate('aaaaabbbbbcccccddd'))
-print(truncate('ccccoooommmppppuuteer'))
-
 
 def has_balanced_parens(string):
-    pass  # TODO: replace this line with your code
+    parens = 0
+
+    for char in string:
+        if char == '(':
+            parens += 1
+        elif char == ')':
+            parens -= 1
+
+            if parens < 0:
+                return False
+
+    return parens == 0
 
 
 def compress(string):
-    pass  # TODO: replace this line with your code
+    compressed = []
+
+    curr_char = ''
+    char_count = 0
+    for char in string:
+        if char != curr_char:
+            compressed.append(curr_char)
+        
+            if char_count > 1:
+                compressed.append(str(char_count))
+        
+            curr_char = char
+            char_count = 0
+
+        char_count += 1
+    compressed.append(curr_char)
+    if char_count > 1:
+        compressed.append(str(char_count))
+    
+    return ('').join(compressed)
